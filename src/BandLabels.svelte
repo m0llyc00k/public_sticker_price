@@ -4,7 +4,7 @@
   export let stickerY = 100000; // dollar height to park the "cost of attendance" label
   export let netY = 35000;      // dollar height to park the "cost after aid" label
   const { yScale, width } = getContext("LayerCake");
-  $: console.log($yScale(stickerY))
+  // $: console.log($yScale(stickerY))
 </script>
 
 {#if show}

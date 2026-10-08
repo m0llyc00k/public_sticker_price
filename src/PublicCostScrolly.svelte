@@ -26,10 +26,10 @@
   $: base = data.map((d, id) => ({ ...d, id }));
 
   const CAPS = [
-    "These are the 2024–25 sticker prices for every public university in the U.S. Department of Education's data.",
+    "These are the 2024–25 sticker prices for every public university in the IPEDS database.",
     "As with private universities, the real cost drops significantly once average grant aid is applied.",
-    "A 2025 Strada survey found most people expect a public four-year college to cost more than $20,000 a year.",
-    "But roughly 87% of colleges actually cost less than $20,000 a year after aid.",
+    "In a 2025 Strada survey, almost 80% of respondents thought public four-year colleges cost more than $20,000 a year.",
+    "But roughly 87% actually cost less than $20,000 a year after aid.",
     "Only about 13% — 72 of them — cost more than $20,000."
   ];
 
@@ -52,7 +52,7 @@
   onMount(() => {
     const scroller = scrollama();
     scroller
-      .setup({ step: ".step", offset: 0.6, debug: false })
+      .setup({ step: ".step--public", offset: 0.6, debug: false })
       .onStepEnter(({ index }) => { step = index; });
     const onResize = () => scroller.resize();
     window.addEventListener("resize", onResize);
@@ -74,9 +74,9 @@
       >
         <Svg>
           <AxisY ticks={TICKS} refValue={showBand ? LINE : null} refLabel="$20,000 a year" />
+          <!-- <Band lo={LINE} hi={AXIS_MAX} show={showBand} label="what most people expect to pay" /> -->
           <Bars {dropped} {emphAll} {mode} bandLo={LINE} bandHi={LINE} />
           <BandLabels show={step === 1} />
-          <Band lo={LINE} hi={AXIS_MAX} show={showBand} />
         </Svg>
       </LayerCake>
     </div>
@@ -84,7 +84,7 @@
 
   <div class="steps">
     {#each CAPS as caption, i}
-      <div class="step">
+      <div class="step step--public">
         <div class="box" class:active={step === i}>{caption}</div>
       </div>
     {/each}
