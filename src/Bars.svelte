@@ -35,7 +35,7 @@
 
 <style>
   .ghost { fill: rgba(0, 122, 88, 0.16); }
-  .fill  { fill: #007a58; }
+  .fill { fill:#007a58; stroke:#007a58; stroke-width:.25; shape-rendering:geometricPrecision; }
   /* x = slide to new slot on re-sort; y/height = the aid drop; opacity = emphasis */
 /* in Bars.svelte */
 .ghost, .fill { transition: x .6s cubic-bezier(.4,0,.2,1), y .32s ease-out, height .32s ease-out, opacity .32s; }

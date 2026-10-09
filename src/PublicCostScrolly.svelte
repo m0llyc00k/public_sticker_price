@@ -68,7 +68,7 @@
         x="i"
         y="s"
         data={rows}
-        xScale={scaleBand().paddingInner(0.1)}
+        xScale={scaleBand().paddingInner(0.2)}
         yScale={scaleLinear()}
         yDomain={[0, AXIS_MAX]}
       >
