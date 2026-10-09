@@ -74,7 +74,7 @@
       >
         <Svg>
           <AxisY ticks={TICKS} refValue={showBand ? LINE : null} refLabel="$20,000 a year" />
-          <!-- <Band lo={LINE} hi={AXIS_MAX} show={showBand} label="what most people expect to pay" /> -->
+          <Band lo={LINE} hi={AXIS_MAX} show={showBand} />
           <Bars {dropped} {emphAll} {mode} bandLo={LINE} bandHi={LINE} />
           <BandLabels show={step === 1} />
         </Svg>
@@ -93,7 +93,8 @@
 
 <style>
   .scrolly{
-    --vh: 92vh;
+    --vh: 100vh;
+    --navh: 100px;               /* height of the Strada top nav — tune to fit */
     --maxw: min(1100px, 92vw);
     position:relative;
     --ink:#182420;
@@ -102,24 +103,29 @@
     font-variant-numeric:tabular-nums;-webkit-font-smoothing:antialiased;
     text-align:left;direction:ltr;
   }
-  @supports (height:100dvh){ .scrolly{ --vh: 92dvh; } }
+  @supports (height:100dvh){ .scrolly{ --vh: 100dvh; } }
 
   .scrolly, .scrolly *{ box-sizing:border-box; margin:0; padding:0; text-align:inherit; }
   .scrolly :where(svg, text, line, rect, tspan){ all: revert; }
 
-  .chart-sticky{
-    position:sticky;top:0;height:var(--vh);width:100%;
-    display:flex;align-items:center;justify-content:center;
+  /* pinned graphic — fills the viewport below the site nav */
+  .chart-sticky{ position:sticky; top:0; height:var(--vh); width:100%; }
+  .chart{
+    position:absolute;
+    top: calc(var(--navh) + clamp(8px,2vh,20px));   /* clear the nav + a little breathing room */
+    left: clamp(16px,4vw,48px);
+    right: clamp(16px,4vw,48px);
+    bottom: clamp(16px,3vh,32px);
   }
-  .chart{ width:var(--maxw); height:min(80%, 720px); }
 
+  /* steps overlaid on the pinned chart */
   .steps{
     position:relative;
     margin:calc(var(--vh) * -1) auto 0;
     z-index:2;pointer-events:none;
     width:var(--maxw);max-width:100%;
   }
-  .step{ min-height:var(--vh); display:block; padding:12vh 0 0; }
+  .step{ min-height:var(--vh); display:block; padding:calc(var(--navh) + 4vh) 0 0; }
   .box{
     margin:0 auto; text-align:left;
     pointer-events:auto; width:fit-content; max-width:34ch;
@@ -134,8 +140,8 @@
   .box.active{opacity:1}
 
   @media (max-width:720px){
-    .scrolly{ --maxw: 100%; }
-    .step{ padding:9vh 12px 0; }
+    .scrolly{ --maxw: 100%; --navh: 72px; }
+    .step{ padding:calc(var(--navh) + 2vh) 12px 0; }
     .box{ max-width:100%; }
   }
 </style>
